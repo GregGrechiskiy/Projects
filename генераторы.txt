@@ -1,0 +1,8 @@
+import random
+def rand(a, b, c):
+    for _ in range(a):
+        yield random.randint(b, c)
+
+gen = rand(5, 1, 10)
+for i in gen:
+    print(i)
