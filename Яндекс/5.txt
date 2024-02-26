@@ -1,0 +1,24 @@
+class Rectangle:
+    def __init__(self, first_point, second_point):
+        self.first_point = first_point
+        self.second_point = second_point
+    
+    def perimeter(self):
+        import math
+        a = math.sqrt((self.first_point[0] - self.first_point[0])**2 + (self.second_point[1] - self.first_point[1])**2)
+        b = math.sqrt((self.first_point[0] - self.second_point[0])**2 + (self.first_point[1] - self.first_point[1])**2)
+        per = (a + b) * 2
+        return (round(per, 2))
+    
+    def area(self):
+        import math
+        a = math.sqrt((self.first_point[0] - self.first_point[0])**2 + (self.second_point[1] - self.first_point[1])**2)
+        b = math.sqrt((self.first_point[0] - self.second_point[0])**2 + (self.first_point[1] - self.first_point[1])**2)
+        ar = a * b
+        return (round(ar, 2))
+
+rect = Rectangle((3.2, -4.3), (7.52, 3.14))
+print(rect.perimeter())
+
+rect = Rectangle((7.52, -4.3), (3.2, 3.14))
+print(rect.area())

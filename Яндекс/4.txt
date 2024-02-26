@@ -1,0 +1,42 @@
+class Programmer:
+    def __init__(self, name, post):
+        self.name = name
+        self.post = post
+        self.salary = 0
+        self.time = 0
+        self.summ = 0
+
+    def work(self, time):
+        if self.post == "Junior":
+            self.time += time
+            self.salary += time * 10
+        elif self.post == "Middle":
+            self.time += time
+            self.salary += time * 15
+        elif self.post == "Senior":
+            self.time += time
+            self.salary += time * (20 + self.summ)
+    
+    def rise(self):
+        if self.post == "Junior":
+            self.post = "Middle"
+        elif self.post == "Middle":
+            self.post = "Senior"
+        elif self.post == "Senior":
+            self.summ += 1
+    
+    def info(self):
+        return f"{self.name} {self.time}ч. {self.salary}тгр."
+
+programmer = Programmer('Васильев Иван', 'Junior')
+programmer.work(750)
+print(programmer.info())
+programmer.rise()
+programmer.work(500)
+print(programmer.info())
+programmer.rise()
+programmer.work(250)
+print(programmer.info())
+programmer.rise()
+programmer.work(250)
+print(programmer.info())
