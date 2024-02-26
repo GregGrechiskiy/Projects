@@ -1,0 +1,24 @@
+class MusicAlbum:
+    def __init__(self, title, artist, release_year, genre, tracklist):
+        self.title = title
+        self.artist = artist
+        self.release_year = release_year
+        self.genre = genre
+        self.tracklist = tracklist
+        self.trec = ""
+    
+    def playRandomTrack(self):
+        import random
+        print("Название: "+self.title)
+        print("Исполнитель: "+self.artist)
+        print("Год: "+self.release_year)
+        print("Жанр: "+self.genre)
+        for i in range(len(self.tracklist)):
+         self.trec = self.trec+self.tracklist[i]+", "
+        print("Треки: ["+self.trec+"]")
+        rand = random.randint(0, len(self.tracklist))
+        print("Воспроизводится трек", rand+1,":",self.tracklist[rand])
+
+play_track = MusicAlbum(title = "Deutschland", artist = "Rammstein", release_year = "2019", genre = "Neue Deutsche Härte", tracklist = ['Deutschland', 'Radio', 'Zeig dich', 'Ausländer', 'Sex', 'Puppe', 'Was ich liebe', 'Diamant', 'Weit weg', 'Tattoo', 'Hallomann'])
+
+play_track.playRandomTrack()

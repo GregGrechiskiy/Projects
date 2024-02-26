@@ -1,0 +1,20 @@
+class Recipe:
+
+    def __init__(self, name, ingredeends):
+        self.name = name
+        self.ingredeends = ingredeends
+
+    def print_ingredients(self):
+        print(f"Ingredeends for {self.name}")
+        for i in range(len(self.ingredeends)):
+            print(f"- {self.ingredeends[i]}")
+
+    def cook(self):
+        print(f"Today we are cooking {self.name}")
+        print("I'm doing a cooking instruction")
+        print(f"{self.name} is DONE!")
+        
+Recipe1 = Recipe(name="Cpagetti", ingredeends=["Tomat", "Egg", "Chips"])
+
+Recipe1.print_ingredients()
+Recipe1.cook()
