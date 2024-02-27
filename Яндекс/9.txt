@@ -1,0 +1,23 @@
+class Queue:
+    queue = []
+
+    def push(self, item):
+        self.queue.append(item)
+
+    def pop(self):
+        return self.queue.pop(0)
+
+    def is_empty(self):
+        return self.queue == []
+
+queue = Queue()
+for item in range(10):
+    queue.push(item)
+while not queue.is_empty():
+    print(queue.pop(), end=" ")
+
+queue = Queue()
+for item in ("Hello,", "world!"):
+    queue.push(item)
+while not queue.is_empty():
+    print(queue.pop())
