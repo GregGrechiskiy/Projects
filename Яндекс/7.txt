@@ -1,97 +1,58 @@
-import math
+class Point:
+    def __init__(self, x, y) -> None:
+        self.x = round(x, 2)
+        self.y = round(y, 2)
+
+    def round(self):
+        self.x = round(self.x, 2)
+        self.y = round(self.y, 2)
+        return self
 
 
 class Rectangle:
-    def __init__(self, point1, point2):
-        self.x1, self.y1 = point1
-        self.x2, self.y2 = point2
+    def __init__(self, corner1, corner2) -> None:
+        self.corner = Point(min(corner1[0], corner2[0]), max(corner1[1], corner2[1]))  # noqa
+        self.width = round(max(corner1[0], corner2[0]) - self.corner.x, 2)
+        self.height = round(self.corner.y - min(corner1[1], corner2[1]), 2)
 
     def perimeter(self):
-        width = abs(self.x2 - self.x1)
-        height = abs(self.y2 - self.y1)
-        perimeter = 2 * (width + height)
-        return round(perimeter, 2)
+        return round((self.width + self.height) * 2, 2)
 
     def area(self):
-        width = abs(self.x2 - self.x1)
-        height = abs(self.y2 - self.y1)
-        area = width * height
-        return round(area, 2)
+        return round(self.width * self.height, 2)
 
     def get_pos(self):
-        return (self.x1, self.y1)
+        return self.corner.x, self.corner.y
 
     def get_size(self):
-        width = abs(self.x2 - self.x1)
-        height = abs(self.y2 - self.y1)
-        return (width, height)
+        return self.width, self.height
 
     def move(self, dx, dy):
-        self.x1 += dx
-        self.y1 += dy
-        self.x2 += dx
-        self.y2 += dy
+        self.corner.x += dx
+        self.corner.y += dy
+        self.corner.round()
 
     def resize(self, width, height):
-        self.x2 = self.x1 + width
-        self.y2 = self.y1 + height
+        self.width = round(width, 2)
+        self.height = round(height, 2)
 
     def turn(self):
-        center_x = (self.x1 + self.x2) / 2
-        center_y = (self.y1 + self.y2) / 2
+        delta = round((self.width - self.height) / 2, 2)
+        self.move(delta, delta)
+        self.height, self.width = self.width, self.height
 
-        new_x1 = 2 * center_x - self.x2
-        new_x2 = 2 * center_x - self.x1
-        new_y1 = 2 * center_y - self.y2
-        new_y2 = 2 * center_y - self.y1
+    def scale(self, ratio):
+        dx = round((self.width * (ratio - 1)), 2)
+        dy = round((self.height * (ratio - 1)), 2)
+        self.move(-dx / 2, dy / 2)
+        self.resize(self.width * ratio, self.height * ratio)
 
-        self.x1 = new_x1
-        self.x2 = new_x2
-        self.y1 = new_y1
-        self.y2 = new_y2
-
-    def scale(self, factor):
-        center_x = (self.x1 + self.x2) / 2
-        center_y = (self.y1 + self.y2) / 2
-
-        width = abs(self.x2 - self.x1)
-        height = abs(self.y2 - self.y1)
-
-        new_width = round(width * factor, 2)
-        new_height = round(height * factor, 2)
-
-        self.x1 = center_x - new_width / 2
-        self.x2 = center_x + new_width / 2
-        self.y1 = center_y - new_height / 2
-        self.y2 = center_y + new_height / 2
-
-
-rect = Rectangle((1, 1), (5, 4))
-
-
-rect.move(2, -1)
-
-
-rect.resize(8, 6)
-
-
+rect = Rectangle((3.14, 2.71), (-3.14, -2.71))
+print(rect.get_pos(), rect.get_size(), sep='\n')
 rect.turn()
+print(rect.get_pos(), rect.get_size(), sep='\n')
 
-
-rect.scale(1.5)
-
-
-pos = rect.get_pos()
-
-
-size = rect.get_size()
-
-
-perimeter = rect.perimeter()
-area = rect.area()
-
-
-print(pos)
-print(size)
-print(perimeter)
-print(area)
+rect = Rectangle((3.14, 2.71), (-3.14, -2.71))
+print(rect.get_pos(), rect.get_size(), sep='\n')
+rect.scale(2.0)
+print(rect.get_pos(), rect.get_size(), sep='\n')
